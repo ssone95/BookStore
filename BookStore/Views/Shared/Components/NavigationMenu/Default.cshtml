@@ -1,0 +1,16 @@
+﻿@model IEnumerable<Genre>
+
+<a class="btn btn-block btn-outline-secondary" asp-action="Index"
+   asp-controller="Home" asp-route-genre="">
+    Home
+</a>
+
+@foreach(var genre in Model)
+{
+    <a class="btn btn-block @(genre.GenreId == ViewBag.SelectedGenre ? "btn-primary" : "btn-outline-secondary")"
+       asp-action="Index" asp-controller="Home"
+       asp-route-genre="@genre.GenreId"
+       asp-route-bookPage="1">
+        @genre.Name
+    </a>
+}
