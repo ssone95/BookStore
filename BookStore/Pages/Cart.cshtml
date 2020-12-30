@@ -18,6 +18,17 @@
             <td class="text-left">@item.Book.Name</td>
             <td class="text-right">@item.Book.Price.ToString("c")</td>
             <td class="text-right">@((item.Quantity *  item.Book.Price).ToString("c"))</td>
+            <td class="text-center">
+                <form asp-page-handler="Remove" method="post">
+                    <input type="hidden" name="BookId"
+                           value="@item.Book.BookId" />
+                    <input type="hidden" name="returnUrl"
+                           value="@Model.ReturnUrl" />
+                    <button type="submit" class="btn btn-sm- btn-danger">
+                        Remove
+                    </button>
+                </form>
+            </td>
         </tr>
         }
     </tbody>

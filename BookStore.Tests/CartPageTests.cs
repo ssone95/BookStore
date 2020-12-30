@@ -32,25 +32,7 @@ namespace BookStore.Tests
             testCart.AddItem(b1, 2);
             testCart.AddItem(b2, 1);
 
-
-            Mock<ISession> mockSession = new Mock<ISession>();
-            byte[] data = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(testCart));
-            mockSession.Setup(x => x.TryGetValue(It.IsAny<string>(), out data));
-
-            Mock<HttpContext> mockContext = new Mock<HttpContext>();
-            mockContext.SetupGet(x => x.Session).Returns(mockSession.Object);
-
-            CartModel cartModel = new CartModel(mock.Object);
-            cartModel.PageContext = new PageContext(new Microsoft.AspNetCore.Mvc.ActionContext
-            {
-                HttpContext = mockContext.Object,
-                RouteData = new Microsoft.AspNetCore.Routing.RouteData(),
-                ActionDescriptor = new Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor()
-                {
-
-                }
-            });
-
+            CartModel cartModel = new CartModel(mock.Object, testCart);
             cartModel.OnGet("myUrl");
 
             Assert.Equal(2, cartModel.Cart.Lines.Count());
@@ -67,24 +49,7 @@ namespace BookStore.Tests
                 .AsQueryable());
 
             Cart testCart = new Cart();
-            Mock<ISession> mockSession = new Mock<ISession>();
-            mockSession.Setup(x => x.Set(It.IsAny<string>(), It.IsAny<byte[]>()))
-                .Callback<string, byte[]>((key, val) => {
-                    testCart = JsonSerializer.Deserialize<Cart>(Encoding.UTF8.GetString(val));
-                });
-
-            Mock<HttpContext> mockContext = new Mock<HttpContext>();
-            mockContext.SetupGet(x => x.Session).Returns(mockSession.Object);
-
-            CartModel cartModel = new CartModel(mock.Object)
-            {
-                PageContext = new PageContext(new ActionContext
-                {
-                    HttpContext = mockContext.Object,
-                    RouteData = new Microsoft.AspNetCore.Routing.RouteData(),
-                    ActionDescriptor = new Microsoft.AspNetCore.Mvc.Abstractions.ActionDescriptor()
-                })
-            };
+            CartModel cartModel = new CartModel(mock.Object, testCart);
 
             cartModel.OnPost(1, "myUrl");
 
