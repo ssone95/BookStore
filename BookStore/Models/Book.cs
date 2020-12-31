@@ -16,6 +16,9 @@ namespace BookStore.Models
         [Column(TypeName = "decimal(18, 2)")]
         public decimal Price { get; set; }
 
-        public virtual List<BookGenre> BookGenres { get; set; }
+        public long GenreId { get; set; }
+        public Genre Genre { get; set; }
+
+        public string Tags { get; set; }
     }
 }

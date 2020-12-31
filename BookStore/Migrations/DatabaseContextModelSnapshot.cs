@@ -29,37 +29,48 @@ namespace BookStore.Migrations
                     b.Property<string>("Description")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<long>("GenreId")
+                        .HasColumnType("bigint");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(18, 2)");
 
+                    b.Property<string>("Tags")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("BookId");
+
+                    b.HasIndex("GenreId");
 
                     b.ToTable("Books");
                 });
 
-            modelBuilder.Entity("BookStore.Models.BookGenre", b =>
+            modelBuilder.Entity("BookStore.Models.CartLine", b =>
                 {
-                    b.Property<long>("Id")
+                    b.Property<int>("CartLineId")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint")
+                        .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<long>("BookId")
+                    b.Property<long?>("BookId")
                         .HasColumnType("bigint");
 
-                    b.Property<long>("GenreId")
-                        .HasColumnType("bigint");
+                    b.Property<int?>("OrderId")
+                        .HasColumnType("int");
 
-                    b.HasKey("Id");
+                    b.Property<int>("Quantity")
+                        .HasColumnType("int");
+
+                    b.HasKey("CartLineId");
 
                     b.HasIndex("BookId");
 
-                    b.HasIndex("GenreId");
+                    b.HasIndex("OrderId");
 
-                    b.ToTable("BookGenres");
+                    b.ToTable("CartLine");
                 });
 
             modelBuilder.Entity("BookStore.Models.Genre", b =>
@@ -75,24 +86,60 @@ namespace BookStore.Migrations
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<long?>("ParentGenreId")
-                        .HasColumnType("bigint");
-
                     b.HasKey("GenreId");
-
-                    b.HasIndex("ParentGenreId");
 
                     b.ToTable("Genres");
                 });
 
-            modelBuilder.Entity("BookStore.Models.BookGenre", b =>
+            modelBuilder.Entity("BookStore.Models.Order", b =>
                 {
-                    b.HasOne("BookStore.Models.Book", "Book")
-                        .WithMany("BookGenres")
-                        .HasForeignKey("BookId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                    b.Property<int>("OrderId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+                    b.Property<string>("City")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Country")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("GiftWrap")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("Line1")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Line2")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Line3")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("Shipped")
+                        .HasColumnType("bit");
+
+                    b.Property<string>("State")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Zip")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("OrderId");
+
+                    b.ToTable("Orders");
+                });
+
+            modelBuilder.Entity("BookStore.Models.Book", b =>
+                {
                     b.HasOne("BookStore.Models.Genre", "Genre")
                         .WithMany()
                         .HasForeignKey("GenreId")
@@ -100,11 +147,15 @@ namespace BookStore.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("BookStore.Models.Genre", b =>
+            modelBuilder.Entity("BookStore.Models.CartLine", b =>
                 {
-                    b.HasOne("BookStore.Models.Genre", "ParentGenre")
+                    b.HasOne("BookStore.Models.Book", "Book")
                         .WithMany()
-                        .HasForeignKey("ParentGenreId");
+                        .HasForeignKey("BookId");
+
+                    b.HasOne("BookStore.Models.Order", null)
+                        .WithMany("Lines")
+                        .HasForeignKey("OrderId");
                 });
 #pragma warning restore 612, 618
         }

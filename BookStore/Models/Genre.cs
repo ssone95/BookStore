@@ -11,8 +11,5 @@ namespace BookStore.Models
         public string Name { get; set; }
 
         public string Description { get; set; }
-
-        public long? ParentGenreId { get; set; }
-        public Genre ParentGenre { get; set; }
     }
 }

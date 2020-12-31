@@ -43,30 +43,14 @@ namespace BookStore.Repository.DbSeed
 
                 _context.Books.AddRange(books);
 
-                _context.SaveChanges();
 
                 foreach (var book in booksWithGenres.Keys)
                 {
-                    var bookGenres = booksWithGenres
+                    var bookGenre = booksWithGenres
                         .Where(x => x.Key == book)
-                        .FirstOrDefault().Value ?? new List<string>();
+                        .FirstOrDefault().Value ?? "";
 
-                    var genresToAdd = new List<BookGenre>();
-
-                    foreach (var genre in bookGenres)
-                    {
-                        var genreFromDb = genres.FirstOrDefault(x => x.Name == genre);
-
-                        var bookGenre = new BookGenre()
-                        {
-                            BookId = book.BookId,
-                            GenreId = genreFromDb.GenreId
-                        };
-
-                        genresToAdd.Add(bookGenre);
-                    }
-
-                    _context.BookGenres.AddRange(genresToAdd);
+                    book.GenreId = _context.Genres.FirstOrDefault(x => x.Name == bookGenre).GenreId;
                 }
 
                 _context.SaveChanges();
@@ -82,9 +66,9 @@ namespace BookStore.Repository.DbSeed
             };
         }
 
-        static Dictionary<Book, List<string>> GetBooks()
+        static Dictionary<Book, string> GetBooks()
         {
-            return new Dictionary<Book, List<string>>()
+            return new Dictionary<Book, string>()
             {
                 {
                     new Book()
@@ -92,7 +76,7 @@ namespace BookStore.Repository.DbSeed
                         Name = "Knjiga 1",
                         Description = "Opis knjige 1",
                         Price = GetRandomPrice()
-                    }, GetRandomGenres()
+                    }, GetRandomGenre()
                 },
                 {
                     new Book()
@@ -100,7 +84,7 @@ namespace BookStore.Repository.DbSeed
                         Name = "Knjiga 2",
                         Description = "Opis knjige 2",
                         Price = GetRandomPrice()
-                    }, GetRandomGenres()
+                    }, GetRandomGenre()
                 },
                 {
                     new Book()
@@ -108,7 +92,7 @@ namespace BookStore.Repository.DbSeed
                         Name = "Knjiga 3",
                         Description = "Opis knjige 3",
                         Price = GetRandomPrice()
-                    }, GetRandomGenres()
+                    }, GetRandomGenre()
                 },
                 {
                     new Book()
@@ -116,7 +100,7 @@ namespace BookStore.Repository.DbSeed
                         Name = "Knjiga 4",
                         Description = "Opis knjige 4",
                         Price = GetRandomPrice()
-                    }, GetRandomGenres()
+                    }, GetRandomGenre()
                 },
                 {
                     new Book()
@@ -124,28 +108,19 @@ namespace BookStore.Repository.DbSeed
                         Name = "Knjiga 5",
                         Description = "Opis knjige 5",
                         Price = GetRandomPrice()
-                    }, GetRandomGenres()
+                    }, GetRandomGenre()
                 }
             };
         }
 
-        private static List<string> GetRandomGenres()
+        private static string GetRandomGenre()
         {
             var random = new Random();
-            int numRandomGenres = random.Next(1, 5);
             var genres = GetMainGenres();
             var genresCount = genres.Count;
-            List<string> selectedGenres = new List<string>();
-            for (int i = 1; i <= numRandomGenres; i++)
-            {
-                var randomGenre = random.Next(1, genresCount);
+            int numRandomGenre = random.Next(1, genresCount);
 
-                var selectedGenre = genres[randomGenre];
-
-                if (!selectedGenres.Any(x => x == selectedGenre.Name))
-                    selectedGenres.Add(selectedGenre.Name);
-            }
-            return selectedGenres;
+            return genres[numRandomGenre].Name;
         }
 
         private static decimal GetRandomPrice()

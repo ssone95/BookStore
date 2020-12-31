@@ -108,37 +108,15 @@ namespace BookStore.Tests
             mock.Setup(m => m.Books).Returns((new Book[]
             {
                 new Book { 
-                    BookId = 1, Name = "B1", BookGenres = new List<BookGenre>() 
-                    { 
-                        new BookGenre() { GenreId = 1 },
-                        new BookGenre() { GenreId = 2 },
-                        new BookGenre() { GenreId = 3 }
-                    } 
+                    BookId = 1, Name = "B1", GenreId = 1
                 },
-                new Book { BookId = 2, Name = "B2", BookGenres = new List<BookGenre>()
-                    {
-                        new BookGenre() { GenreId = 1 },
-                        new BookGenre() { GenreId = 3 }
-                    }
+                new Book { BookId = 2, Name = "B2", GenreId = 2
                 },
-                new Book { BookId = 3, Name = "B3", BookGenres = new List<BookGenre>()
-                    {
-                        new BookGenre() { GenreId = 1 },
-                        new BookGenre() { GenreId = 2 },
-                        new BookGenre() { GenreId = 3 }
-                    }
+                new Book { BookId = 3, Name = "B3", GenreId = 3
                 },
-                new Book { BookId = 4, Name = "B4", BookGenres = new List<BookGenre>()
-                    {
-                        new BookGenre() { GenreId = 2 },
-                        new BookGenre() { GenreId = 3 }
-                    } 
+                new Book { BookId = 4, Name = "B4", GenreId = 2
                 },
-                new Book { BookId = 5, Name = "B5", BookGenres = new List<BookGenre>()
-                    {
-                        new BookGenre() { GenreId = 1 },
-                        new BookGenre() { GenreId = 3 }
-                    } 
+                new Book { BookId = 5, Name = "B5", GenreId = 3
                 },
             }).AsQueryable());
 
@@ -168,42 +146,27 @@ namespace BookStore.Tests
                 new Book 
                 { 
                     BookId = 1, Name = "B1", 
-                    BookGenres = new List<BookGenre> 
-                    { 
-                        new BookGenre { GenreId = 1 } 
-                    } 
+                    GenreId = 1 
                 },
                 new Book
                 {
                     BookId = 2, Name = "B2",
-                    BookGenres = new List<BookGenre>
-                    {
-                        new BookGenre { GenreId = 2 }
-                    }
+                    GenreId = 2
                 },
                 new Book
                 {
                     BookId = 3, Name = "B3",
-                    BookGenres = new List<BookGenre>
-                    {
-                        new BookGenre { GenreId = 1 }
-                    }
+                    GenreId = 3
                 },
                 new Book
                 {
                     BookId = 4, Name = "B4",
-                    BookGenres = new List<BookGenre>
-                    {
-                        new BookGenre { GenreId = 2 }
-                    }
+                    GenreId = 2
                 },
                 new Book
                 {
                     BookId = 5, Name = "B5",
-                    BookGenres = new List<BookGenre>
-                    {
-                        new BookGenre { GenreId = 3 }
-                    }
+                    GenreId = 3
                 }
             }).AsQueryable<Book>());
 

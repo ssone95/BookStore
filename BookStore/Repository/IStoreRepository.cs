@@ -10,6 +10,8 @@ namespace BookStore.Repository
     {
         IQueryable<Book> Books { get; }
         IQueryable<Genre> Genres { get; }
-        IQueryable<BookGenre> BookGenres { get; }
+
+        void SaveBook(Book b);
+        void SaveGenre(Genre g);
     }
 }

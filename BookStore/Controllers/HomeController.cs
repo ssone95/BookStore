@@ -21,9 +21,8 @@ namespace BookStore.Controllers
             BookListViewModel bookListViewModel = new BookListViewModel();
 
             var books = _storeRepository.Books
-                    .Include(x => x.BookGenres)
-                        .ThenInclude(x => x.Genre)
-                    .Where(x => genre == null || x.BookGenres.Any(x => x.GenreId == genre))
+                    .Include(x => x.Genre)
+                    .Where(x => genre == null || x.GenreId == genre)
                     .OrderBy(x => x.BookId)
                     .Skip((bookPage - 1) * PageSize)
                     .Take(PageSize);
@@ -34,7 +33,7 @@ namespace BookStore.Controllers
             {
                 CurrentPage = bookPage,
                 ItemsPerPage = PageSize,
-                TotalItems = _storeRepository.Books.Where(x => genre == null || x.BookGenres.Any(x => x.GenreId == genre)).Count()
+                TotalItems = _storeRepository.Books.Where(x => genre == null || x.GenreId == genre).Count()
             };
             return View(bookListViewModel);
         }

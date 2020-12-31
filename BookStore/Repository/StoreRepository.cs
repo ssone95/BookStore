@@ -16,6 +16,14 @@ namespace BookStore.Repository
 
         public IQueryable<Genre> Genres => _context.Genres;
 
-        public IQueryable<BookGenre> BookGenres => _context.BookGenres;
+        public void SaveBook(Book b)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void SaveGenre(Genre g)
+        {
+            throw new NotImplementedException();
+        }
     }
 }
