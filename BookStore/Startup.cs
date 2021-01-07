@@ -8,6 +8,7 @@ using BookStore.Repository.DbSeed;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -35,6 +36,14 @@ namespace BookStore
                 o.UseSqlServer(Configuration["ConnectionStrings:BookStoreConnection"]);
             });
 
+            services.AddDbContext<IdentityContext>(o =>
+            {
+                o.UseSqlServer(Configuration["ConnectionStrings:BookStoreIdentityConnection"]);
+            });
+
+            services.AddIdentity<IdentityUser, IdentityRole>()
+                .AddEntityFrameworkStores<IdentityContext>();
+
             services.AddScoped<IStoreRepository, StoreRepository>();
             services.AddScoped<IOrderRepository, OrderRepository>();
             services.AddRazorPages();
@@ -50,12 +59,22 @@ namespace BookStore
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
-            app.UseDeveloperExceptionPage();
-            app.UseStatusCodePages();
+            if (env.IsProduction())
+            {
+                app.UseExceptionHandler("/error");
+            }
+            else
+            {
+                app.UseDeveloperExceptionPage();
+                app.UseStatusCodePages();
+            }
             app.UseStaticFiles();
             app.UseSession();
 
             app.UseRouting();
+
+            app.UseAuthentication();
+            app.UseAuthorization();
 
             app.UseEndpoints(ep => {
                 ep.MapControllerRoute("genrepage", "{genre:int}/Page{bookPage:int}",
@@ -78,6 +97,8 @@ namespace BookStore
             });
 
             SeedData.EnsureDataExists(app);
+
+            SeedIdentityData.EnsurePopulated(app);
         }
     }
 }

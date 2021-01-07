@@ -16,14 +16,38 @@ namespace BookStore.Repository
 
         public IQueryable<Genre> Genres => _context.Genres;
 
+        public void CreateBook(Book b)
+        {
+            _context.Add(b);
+            _context.SaveChanges();
+        }
+
+        public void CreateGenre(Genre g)
+        {
+            _context.Add(g);
+            _context.SaveChanges();
+        }
+
+        public void DeleteBook(Book b)
+        {
+            _context.Remove(b);
+            _context.SaveChanges();
+        }
+
+        public void DeleteGenre(Genre g)
+        {
+            _context.Remove(g);
+            _context.SaveChanges();
+        }
+
         public void SaveBook(Book b)
         {
-            throw new NotImplementedException();
+            _context.SaveChanges();
         }
 
         public void SaveGenre(Genre g)
         {
-            throw new NotImplementedException();
+            _context.SaveChanges();
         }
     }
 }
