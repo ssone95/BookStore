@@ -1,0 +1,111 @@
+﻿@page "/admin/Articles/edit/{id:long}"
+
+@page "/admin/Articles/create"
+ 
+@using PetStore.Models
+@using Microsoft.EntityFrameworkCore
+@using Microsoft.AspNetCore.Components.Routing
+@using PetStore.Infrastructure
+@using PetStore.Repository 
+@using Microsoft.AspNetCore.Components.Forms 
+@using System.Collections.Generic
+@using PetStore.Components 
+
+@inherits OwningComponentBase<IStoreRepository>
+
+<style>
+    div.validation-message { color: rgb(220, 53, 69); font-weight: 500; }
+</style>
+
+<h3 class="bg-@ThemeColor text-white text-center p-1">@TitleText an Article</h3>
+
+<EditForm Model="Article" OnValidSubmit="SaveArticle">
+    <DataAnnotationsValidator />
+
+    @if (Article.ArticleId > 0)
+    {
+        <div class="form-group">
+            <label>ID</label>
+            <input class="form-control" disabled value="@Article.ArticleId" />
+        </div>
+    }
+
+    <div class="form-group">
+        <label>Name</label>
+        <ValidationMessage For="@(() => Article.Name)" />
+        <InputText class="form-control" @bind-Value="Article.Name" />
+    </div>
+
+    <div class="form-group">
+        <label>Description</label>
+        <ValidationMessage For="@(() => Article.Description)" />
+        <InputTextArea class="form-control" @bind-Value="Article.Description" />
+    </div>
+
+    <div class="form-group">
+        <label>ArticleType</label>
+        <ValidationMessage For="@(() => Article.ArticleTypeId)" />
+        <ExtendedInputSelect class="form-control selectpicker" @bind-Value="Article.ArticleTypeId">
+            <option value="0">Select a ArticleType</option>
+            @if (ArticleTypes != null)
+            {
+                @foreach (var ArticleType in ArticleTypes)
+                {
+                    <option value="@ArticleType.ArticleTypeId">@ArticleType.Name</option>
+                }
+            }
+        </ExtendedInputSelect>
+    </div>
+
+    <div class="form-group">
+        <label>Price</label>
+        <ValidationMessage For="@(() => Article.Price)" />
+        <InputNumber class="form-control" @bind-Value="Article.Price" />
+    </div>
+
+    <button type="submit" class="btn btn-@ThemeColor">Save</button>
+
+    <NavLink class="btn btn-secondary" href="/admin/Articles">Cancel</NavLink>
+</EditForm>
+
+@code {
+
+    [Inject]
+    public PetStore.Repository.IStoreRepository Repository { get; set; }
+
+    [Inject]
+    public NavigationManager NavManager { get; set; }
+
+    [Parameter]
+    public long Id { get; set; }
+
+    public Article Article { get; set; }
+
+    public List<ArticleType> ArticleTypes { get; set; }
+
+    protected override void OnParametersSet()
+    {
+        if (Id > 0)
+            Article = Repository.Articles.FirstOrDefault(x => x.ArticleId == Id);
+        else
+            Article = new Article();
+
+        ArticleTypes = Repository.ArticleTypes.ToList();
+    }
+
+    public void SaveArticle()
+    {
+        if(Id > 0)
+        {
+            Repository.SaveArticle(Article);
+        } else
+        {
+            Repository.CreateArticle(Article);
+        }
+
+        NavManager.NavigateTo("/admin/Articles");
+    }
+
+    public string ThemeColor => Id > 0 ? "warning" : "primary";
+    public string TitleText => Id > 0 ? "Edit" : "Create";
+}

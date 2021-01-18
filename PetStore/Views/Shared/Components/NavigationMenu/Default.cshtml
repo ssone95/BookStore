@@ -1,0 +1,16 @@
+﻿@model IEnumerable<ArticleType>
+
+<a class="btn btn-block btn-outline-secondary" asp-action="Index"
+   asp-controller="Home" asp-route-ArticleType="">
+    Home
+</a>
+
+@foreach(var ArticleType in Model)
+{
+    <a class="btn btn-block @(ArticleType.ArticleTypeId == ViewBag.SelectedArticleType ? "btn-primary" : "btn-outline-secondary")"
+       asp-action="Index" asp-controller="Home"
+       asp-route-ArticleType="@ArticleType.ArticleTypeId"
+       asp-route-ArticlePage="1">
+        @ArticleType.Name
+    </a>
+}

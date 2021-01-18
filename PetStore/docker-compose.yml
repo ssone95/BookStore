@@ -1,0 +1,23 @@
+version: '3.4'
+
+services:
+    PetStore:
+        container_name: 'PetStore'
+        build: .
+        ports:
+          - "5000:5000"
+        environment:
+          - ASPNETCORE_ENVIRONMENT=Production
+        depends_on:
+          - sqlserver
+    sqlserver:
+        container_name: 'sqlserver'
+        hostname: 'sqlserver'
+        image: "mcr.microsoft.com/mssql/server:2019-latest"
+        user: root
+        environment:
+            SA_PASSWORD: "MyDbSecretPassword123"
+            MSSQL_SA_PASSWORD: "MyDbSecretPassword123"
+            ACCEPT_EULA: "Y"
+        ports:
+          - "1433:1433"
