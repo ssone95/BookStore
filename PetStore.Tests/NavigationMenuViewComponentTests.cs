@@ -17,10 +17,10 @@ namespace PetStore.Tests
         private ArticleType[] GetArticleTypes()
         {
             return new ArticleType[] {
-                new ArticleType() { ArticleTypeId = 1, Name = "P1", Description = "D1" },
-                new ArticleType() { ArticleTypeId = 2, Name = "P2", Description = "D2" },
-                new ArticleType() { ArticleTypeId = 3, Name = "P3", Description = "D3" },
-                new ArticleType() { ArticleTypeId = 4, Name = "P4", Description = "D4" },
+                new ArticleType() { ArticleTypeId = 1, Name = "Vrsta 1", Description = "Opis vrste 1" },
+                new ArticleType() { ArticleTypeId = 2, Name = "Vrsta 2", Description = "Opis vrste 2" },
+                new ArticleType() { ArticleTypeId = 3, Name = "Vrsta 3", Description = "Opis vrste 3" },
+                new ArticleType() { ArticleTypeId = 4, Name = "Vrsta 4", Description = "Opis vrste 4" },
             };
         }
 

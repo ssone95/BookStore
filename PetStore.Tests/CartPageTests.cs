@@ -21,8 +21,8 @@ namespace PetStore.Tests
         [Fact]
         public void Can_Load_Cart()
         {
-            Article b1 = new Article { ArticleId = 1, Name = "B1" };
-            Article b2 = new Article { ArticleId = 2, Name = "B2" };
+            Article b1 = new Article { ArticleId = 1, Name = "Article 1" };
+            Article b2 = new Article { ArticleId = 2, Name = "Article 2" };
 
             Mock<IStoreRepository> mock = new Mock<IStoreRepository>();
             mock.Setup(x => x.Articles).Returns((new Article[] { b1, b2 })
@@ -42,7 +42,7 @@ namespace PetStore.Tests
         [Fact]
         public void Can_Update_Cart()
         {
-            Article b1 = new Article { ArticleId = 1, Name = "B1" };
+            Article b1 = new Article { ArticleId = 1, Name = "Article 1" };
 
             Mock<IStoreRepository> mock = new Mock<IStoreRepository>();
             mock.Setup(x => x.Articles).Returns((new Article[] { b1 })
@@ -54,7 +54,7 @@ namespace PetStore.Tests
             cartModel.OnPost(1, "myUrl");
 
             Assert.Single(testCart.Lines);
-            Assert.Equal("B1", testCart.Lines.First().Article.Name);
+            Assert.Equal("Article 1", testCart.Lines.First().Article.Name);
             Assert.Equal(1, testCart.Lines.First().Quantity);
         }
     }

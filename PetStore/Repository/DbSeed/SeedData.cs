@@ -73,40 +73,40 @@ namespace PetStore.Repository.DbSeed
                 {
                     new Article()
                     {
-                        Name = "Knjiga 1",
-                        Description = "Opis knjige 1",
+                        Name = "Article 1",
+                        Description = "Article Description 1",
                         Price = GetRandomPrice()
                     }, GetRandomArticleType()
                 },
                 {
                     new Article()
                     {
-                        Name = "Knjiga 2",
-                        Description = "Opis knjige 2",
+                        Name = "Article 2",
+                        Description = "Article Description 2",
                         Price = GetRandomPrice()
                     }, GetRandomArticleType()
                 },
                 {
                     new Article()
                     {
-                        Name = "Knjiga 3",
-                        Description = "Opis knjige 3",
+                        Name = "Article 3",
+                        Description = "Article Description 3",
                         Price = GetRandomPrice()
                     }, GetRandomArticleType()
                 },
                 {
                     new Article()
                     {
-                        Name = "Knjiga 4",
-                        Description = "Opis knjige 4",
+                        Name = "Article 4",
+                        Description = "Article Description 4",
                         Price = GetRandomPrice()
                     }, GetRandomArticleType()
                 },
                 {
                     new Article()
                     {
-                        Name = "Knjiga 5",
-                        Description = "Opis knjige 5",
+                        Name = "Article 5",
+                        Description = "Article Description 5",
                         Price = GetRandomPrice()
                     }, GetRandomArticleType()
                 }
@@ -135,11 +135,11 @@ namespace PetStore.Repository.DbSeed
         {
             return new List<ArticleType>()
             {
-                new ArticleType() { Name = "Fantasy", Description = "Fantasy" },
-                new ArticleType() { Name = "Action", Description = "Action" },
-                new ArticleType() { Name = "Classics", Description = "Classics" },
-                new ArticleType() { Name = "Mystery", Description = "Mystery" },
-                new ArticleType() { Name = "Sci-Fi", Description = "Science fiction" },
+                new ArticleType() { Name = "Food", Description = "Granules in liquid and solid form, canned food, supplements, vitamins, ..." },
+                new ArticleType() { Name = "Collars", Description = "Collars, leashes, chains and similar equipment" },
+                new ArticleType() { Name = "Accessories", Description = "Various shampoos, baths and preparations for the care of your pets" },
+                new ArticleType() { Name = "Treats", Description = "Treats for your pets" },
+                new ArticleType() { Name = "Medications", Description = "Medications for your pets" },
             };
         }
     }

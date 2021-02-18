@@ -21,8 +21,8 @@ namespace PetStore.Tests
 
             mock.Setup(m => m.Articles).Returns((new Article[]
             {
-                new Article { ArticleId = 1, Name = "B1" },
-                new Article { ArticleId = 2, Name = "B2" },
+                new Article { ArticleId = 1, Name = "Article 1" },
+                new Article { ArticleId = 2, Name = "Article 2" },
             }).AsQueryable());
 
             HomeController controller = new HomeController(mock.Object);
@@ -34,8 +34,8 @@ namespace PetStore.Tests
             Article[] ArticleArray = result.Articles.ToArray();
 
             Assert.True(ArticleArray.Length == 2);
-            Assert.Equal("B1", ArticleArray[0].Name);
-            Assert.Equal("B2", ArticleArray[1].Name);
+            Assert.Equal("Article 1", ArticleArray[0].Name);
+            Assert.Equal("Article 2", ArticleArray[1].Name);
         }
 
         [Fact]
@@ -45,11 +45,11 @@ namespace PetStore.Tests
 
             mock.Setup(m => m.Articles).Returns((new Article[]
             {
-                new Article { ArticleId = 1, Name = "B1" },
-                new Article { ArticleId = 2, Name = "B2" },
-                new Article { ArticleId = 3, Name = "B3" },
-                new Article { ArticleId = 4, Name = "B4" },
-                new Article { ArticleId = 5, Name = "B5" },
+                new Article { ArticleId = 1, Name = "Article 1" },
+                new Article { ArticleId = 2, Name = "Article 2" },
+                new Article { ArticleId = 3, Name = "Article 3" },
+                new Article { ArticleId = 4, Name = "Article 4" },
+                new Article { ArticleId = 5, Name = "Article 5" },
             }).AsQueryable());
 
             HomeController controller = new HomeController(mock.Object)
@@ -64,8 +64,8 @@ namespace PetStore.Tests
             Article[] ArticleArray = result.Articles.ToArray();
 
             Assert.True(ArticleArray.Length == 2);
-            Assert.Equal("B4", ArticleArray[0].Name);
-            Assert.Equal("B5", ArticleArray[1].Name);
+            Assert.Equal("Article 4", ArticleArray[0].Name);
+            Assert.Equal("Article 5", ArticleArray[1].Name);
         }
 
         [Fact]
@@ -75,11 +75,11 @@ namespace PetStore.Tests
 
             mock.Setup(m => m.Articles).Returns((new Article[]
             {
-                new Article { ArticleId = 1, Name = "B1" },
-                new Article { ArticleId = 2, Name = "B2" },
-                new Article { ArticleId = 3, Name = "B3" },
-                new Article { ArticleId = 4, Name = "B4" },
-                new Article { ArticleId = 5, Name = "B5" },
+                new Article { ArticleId = 1, Name = "Article 1" },
+                new Article { ArticleId = 2, Name = "Article 2" },
+                new Article { ArticleId = 3, Name = "Article 3" },
+                new Article { ArticleId = 4, Name = "Article 4" },
+                new Article { ArticleId = 5, Name = "Article 5" },
             }).AsQueryable());
 
             HomeController controller = new HomeController(mock.Object)
@@ -108,15 +108,15 @@ namespace PetStore.Tests
             mock.Setup(m => m.Articles).Returns((new Article[]
             {
                 new Article { 
-                    ArticleId = 1, Name = "B1", ArticleTypeId = 1
+                    ArticleId = 1, Name = "Article 1", ArticleTypeId = 1
                 },
-                new Article { ArticleId = 2, Name = "B2", ArticleTypeId = 2
+                new Article { ArticleId = 2, Name = "Article 2", ArticleTypeId = 2
                 },
-                new Article { ArticleId = 3, Name = "B3", ArticleTypeId = 3
+                new Article { ArticleId = 3, Name = "Article 3", ArticleTypeId = 3
                 },
-                new Article { ArticleId = 4, Name = "B4", ArticleTypeId = 2
+                new Article { ArticleId = 4, Name = "Article 4", ArticleTypeId = 2
                 },
-                new Article { ArticleId = 5, Name = "B5", ArticleTypeId = 3
+                new Article { ArticleId = 5, Name = "Article 5", ArticleTypeId = 3
                 },
             }).AsQueryable());
 
@@ -145,27 +145,27 @@ namespace PetStore.Tests
             mock.Setup(m => m.Articles).Returns((new Article[] {
                 new Article 
                 { 
-                    ArticleId = 1, Name = "B1", 
+                    ArticleId = 1, Name = "Article 1", 
                     ArticleTypeId = 1 
                 },
                 new Article
                 {
-                    ArticleId = 2, Name = "B2",
+                    ArticleId = 2, Name = "Article 2",
                     ArticleTypeId = 2
                 },
                 new Article
                 {
-                    ArticleId = 3, Name = "B3",
+                    ArticleId = 3, Name = "Article 3",
                     ArticleTypeId = 3
                 },
                 new Article
                 {
-                    ArticleId = 4, Name = "B4",
+                    ArticleId = 4, Name = "Article 4",
                     ArticleTypeId = 2
                 },
                 new Article
                 {
-                    ArticleId = 5, Name = "B5",
+                    ArticleId = 5, Name = "Article 5",
                     ArticleTypeId = 3
                 }
             }).AsQueryable<Article>());

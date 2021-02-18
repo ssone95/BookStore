@@ -13,8 +13,8 @@ namespace PetStore.Tests
         [Fact]
         public void Can_Add_New_Lines()
         {
-            Article b1 = new Article { ArticleId = 1, Name = "B1" };
-            Article b2 = new Article { ArticleId = 2, Name = "B2" };
+            Article b1 = new Article { ArticleId = 1, Name = "Article 1" };
+            Article b2 = new Article { ArticleId = 2, Name = "Article 2" };
 
             Cart target = new Cart();
 
@@ -30,8 +30,8 @@ namespace PetStore.Tests
         [Fact]
         public void Can_Ad_Quantity_For_Existing_Lines()
         {
-            Article b1 = new Article { ArticleId = 1, Name = "B1" };
-            Article b2 = new Article { ArticleId = 2, Name = "B2" };
+            Article b1 = new Article { ArticleId = 1, Name = "Article 1" };
+            Article b2 = new Article { ArticleId = 2, Name = "Article 2" };
 
             Cart target = new Cart();
 
@@ -52,9 +52,9 @@ namespace PetStore.Tests
         [Fact]
         public void Can_Remove_Line()
         {
-            Article b1 = new Article { ArticleId = 1, Name = "B1" };
-            Article b2 = new Article { ArticleId = 2, Name = "B2" };
-            Article b3 = new Article { ArticleId = 3, Name = "B3" };
+            Article b1 = new Article { ArticleId = 1, Name = "Article 1" };
+            Article b2 = new Article { ArticleId = 2, Name = "Article 2" };
+            Article b3 = new Article { ArticleId = 3, Name = "Article 3" };
 
             Cart target = new Cart();
 
@@ -73,8 +73,8 @@ namespace PetStore.Tests
         [Fact]
         public void Calculate_Cart_Total()
         {
-            Article b1 = new Article { ArticleId = 1, Name = "B1", Price = 100M };
-            Article b2 = new Article { ArticleId = 2, Name = "B2", Price = 50M };
+            Article b1 = new Article { ArticleId = 1, Name = "Article 1", Price = 100M };
+            Article b2 = new Article { ArticleId = 2, Name = "Article 2", Price = 50M };
 
             Cart target = new Cart();
             target.AddItem(b1, 1);
@@ -89,8 +89,8 @@ namespace PetStore.Tests
         [Fact]
         public void Can_Clear_Contents()
         {
-            Article b1 = new Article { ArticleId = 1, Name = "B1", Price = 100M };
-            Article b2 = new Article { ArticleId = 2, Name = "B2", Price = 50M };
+            Article b1 = new Article { ArticleId = 1, Name = "Article 1", Price = 100M };
+            Article b2 = new Article { ArticleId = 2, Name = "Article 2", Price = 50M };
 
             Cart target = new Cart();
             target.AddItem(b1, 1);

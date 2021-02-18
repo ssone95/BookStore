@@ -15,8 +15,14 @@
     <div class="bg-dark text-white p-2">
         <div class="container-fluid">
             <div class="row">
-                <div class="col-3 navbar-brand">PETS & ACCESSORIES</div>
-                <div class="col-6 text-right">
+                <div class="col-3">
+                    <a class="navbar-brand btn btn-outline-danger"
+                       asp-action="Index" asp-controller="Home">
+                        PETS & ACCESSORIES
+                    </a>
+                </div>
+                <div class="col-6"></div>
+                <div class="col-3 text-right">
                     <vc:cart-summary />
                 </div>
             </div>
