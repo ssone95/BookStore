@@ -68,7 +68,7 @@ namespace PetStore.Tests
                 as RedirectToPageResult;
 
             
-            mock.Verify(m => m.SaveOrder(It.IsAny<Order>()), Times.Never);
+            mock.Verify(m => m.SaveOrder(It.IsAny<Order>()), Times.Once);
 
             Assert.Equal("/Completed", result.PageName);
         }
